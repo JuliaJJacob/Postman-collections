@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "c4116f8b-61d9-4230-b7e0-e2011980618e",
+		"name": "Star Wars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get People",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98db0307-dbe8-49cd-bfea-d4ebe3089adc",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Table has 82 people\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.count).to.eql(82);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains Luke Skywalker\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Luke Skywalker\")\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Luke Skywalker is in Name field\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.results[0].name).to.eql(\"Luke Skywalker\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "6e30e90f-f616-4cf9-8691-c71cff0a49ec",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}people/"
+			},
+			"response": []
+		},
+		{
+			"name": "Starship Graveyard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99b90422-a9bb-44d0-87df-c8841786acc0",
+						"exec": [
+							"\r",
+							"pm.test(\"Crashed starships check. Rest in peace space cowboys\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"https://swapi.dev/api/starships/1/\", \"https://swapi.dev/api/starships/4/\", \"https://swapi.dev/api/starships/6/\", \"https://swapi.dev/api/starships/7/\",\"https://swapi.dev/api/starships/8/\", \"https://swapi.dev/api/starships/14/\", \"https://swapi.dev/api/starships/16/\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "92791a8a-29e1-4185-8b41-022f187d98f1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}starships"
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicles Value Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4cfe1fe8-8a8f-472f-b92f-d76f22373e9f",
+						"exec": [
+							"pm.test(\"Sand Crawler cost check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.results[0].cost_in_credits).to.eql('150000');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Can see the date of the last cost check\", function () {\r",
+							"    pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"_postman_id": "856cfb93-12c3-4913-a747-ce6763c303e8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/vehicles"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f4f36b54-31fa-4933-958f-7322908f1549",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a4cc6fe3-ed25-4e79-8ac4-e4a49c034fb4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "1834ec7c-653c-4a4f-ae67-1b94b3f3589d",
+			"key": "url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
